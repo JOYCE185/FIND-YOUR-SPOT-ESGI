@@ -24,6 +24,11 @@
     <script src="src/map/popup-template.js"></script>
     <script>
       // Exemple, en attendant le vrai fetch de parkings.json (A06)
+
+      var schoolIcon = L.icon({
+        iconUrl: "src/map/school-marker.png",
+        iconSize: [38, 38],
+      });
       const parkings = [
         {
           nom: "Parking relais Krypton",
@@ -66,7 +71,9 @@
         },
       ];
 
-      const map = L.map("map").setView([43.5140, 5.4291], 16);
+      const map = L.map("map").setView([43.514, 5.4291], 16);
+      L.marker([43.514, 5.4291], { icon: schoolIcon }).addTo(map);
+
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(map);
