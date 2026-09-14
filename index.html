@@ -6,11 +6,74 @@
     <meta name="robots" content="noindex" />
     <title>Find Your Spot</title>
     <link href="style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+    />
+    <link rel="stylesheet" href="./src/map/popup-parking.css" />
   </head>
   <body>
     <main>
       <h1>Find Your Spot</h1>
       <p>Projet ESGI — en cours de construction</p>
+
+      <div id="map"></div>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="src/map/popup-template.js"></script>
+    <script>
+      // Exemple, en attendant le vrai fetch de parkings.json (A06)
+      const parkings = [
+        {
+          nom: "Parking relais Krypton",
+          lat: 43.510992,
+          lng: 5.447616,
+          type: "Parking relais",
+          prix_2h: 3.5,
+          distance_metres: 1590,
+          pmr: true,
+          ouvert_24h: false,
+          abrite: false,
+          duree_max: "1 jour",
+          photo: "",
+        },
+        {
+          nom: "Parking relais Lieutenant-Colonel Jeanpierre",
+          lat: 43.53054,
+          lng: 5.41632,
+          type: "Parking couvert",
+          prix_2h: 3.5,
+          distance_metres: 2110,
+          pmr: true,
+          ouvert_24h: false,
+          abrite: true,
+          duree_max: "7 jours",
+          photo: "",
+        },
+        {
+          nom: "Parking relais Hauts de Brunet",
+          lat: 43.54707,
+          lng: 5.43829,
+          type: "Parking relais",
+          prix_2h: 3.5,
+          distance_metres: 3800,
+          pmr: true,
+          ouvert_24h: false,
+          abrite: false,
+          duree_max: "1 jour",
+          photo: "",
+        },
+      ];
+
+      const map = L.map("map").setView([43.5140, 5.4291], 16);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      parkings.forEach((p) => {
+        L.marker([p.lat, p.lng]).addTo(map).bindPopup(popupTemplate(p));
+      });
+    </script>
   </body>
 </html>
