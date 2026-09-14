@@ -3,84 +3,285 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Find Your Spot</title>
-    <link href="style.css" rel="stylesheet" />
+    <title>Find Your Spot — stationnement autour de l'école</title>
+    <meta
+      name="description"
+      content="Carte interactive des parkings et places de stationnement autour de l'école. Filtrez par prix, distance à pied, accessibilité, horaires et abri."
+    />
+
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
-    <link rel="stylesheet" href="./src/map/popup-parking.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <main>
-      <h1>Find Your Spot</h1>
-      <p>Projet ESGI — en cours de construction</p>
+    <div class="app">
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true"
+            ><span class="brand__dot"></span
+          ></span>
+          <span class="brand__text">
+            <strong class="brand__name">Find Your Spot</strong>
+            <span class="brand__tagline"
+              >Stationnement autour de l'école — G01</span
+            >
+          </span>
+        </div>
 
-      <div id="map"></div>
-    </main>
+        <p class="site-header__meta">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="updated-label"
+            >relevé du <time datetime="2026-09-12">12 sept. 2026</time></span
+          >
+          <span class="site-header__sep" aria-hidden="true">·</span>
+          <span class="site-header__source">parkings.json</span>
+        </p>
+      </header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script src="src/map/popup-template.js"></script>
-    <script>
-      // Exemple, en attendant le vrai fetch de parkings.json (A06)
+      <div class="layout">
+        <!-- ===================== PANNEAU LATÉRAL ===================== -->
+        <aside class="panel" aria-label="Filtres et résultats">
+          <form class="filters" id="filters">
+            <div class="filters__head">
+              <h2 class="filters__title">Filtres</h2>
+              <button type="reset" class="filters__reset" id="reset-filters">
+                Réinitialiser
+              </button>
+            </div>
 
-      var schoolIcon = L.icon({
-        iconUrl: "src/map/school-marker.png",
-        iconSize: [38, 38],
-      });
-      const parkings = [
-        {
-          nom: "Parking relais Krypton",
-          lat: 43.510992,
-          lng: 5.447616,
-          type: "Parking relais",
-          prix_2h: 3.5,
-          distance_metres: 1590,
-          pmr: true,
-          ouvert_24h: false,
-          abrite: false,
-          duree_max: "1 jour",
-          photo: "",
-        },
-        {
-          nom: "Parking relais Lieutenant-Colonel Jeanpierre",
-          lat: 43.53054,
-          lng: 5.41632,
-          type: "Parking couvert",
-          prix_2h: 3.5,
-          distance_metres: 2110,
-          pmr: true,
-          ouvert_24h: false,
-          abrite: true,
-          duree_max: "7 jours",
-          photo: "",
-        },
-        {
-          nom: "Parking relais Hauts de Brunet",
-          lat: 43.54707,
-          lng: 5.43829,
-          type: "Parking relais",
-          prix_2h: 3.5,
-          distance_metres: 3800,
-          pmr: true,
-          ouvert_24h: false,
-          abrite: false,
-          duree_max: "1 jour",
-          photo: "",
-        },
-      ];
+            <label class="field" for="filter-price">
+              <span class="field__label">Prix maximum</span>
+              <select
+                class="select"
+                id="filter-price"
+                name="price"
+                data-filter="price"
+              >
+                <option value="99" selected>Tous les tarifs</option>
+                <option value="0">Gratuit uniquement</option>
+                <option value="1.5">Jusqu'à 1,50 €/h</option>
+                <option value="2.5">Jusqu'à 2,50 €/h</option>
+              </select>
+            </label>
 
-      const map = L.map("map").setView([43.514, 5.4291], 16);
-      L.marker([43.514, 5.4291], { icon: schoolIcon }).addTo(map);
+            <label class="field" for="filter-walk">
+              <span class="field__label">
+                Distance à pied —
+                <output class="field__value" id="walk-label" for="filter-walk"
+                  >toutes distances</output
+                >
+              </span>
+              <input
+                class="range"
+                type="range"
+                id="filter-walk"
+                name="walk"
+                data-filter="walk"
+                min="100"
+                max="3000"
+                step="50"
+                value="100"
+                aria-describedby="walk-label"
+              />
+            </label>
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-      }).addTo(map);
+            <fieldset class="options">
+              <legend class="sr-only">Équipements et disponibilité</legend>
 
-      parkings.forEach((p) => {
-        L.marker([p.lat, p.lng]).addTo(map).bindPopup(popupTemplate(p));
-      });
-    </script>
+              <label class="check">
+                <input
+                  type="checkbox"
+                  id="filter-pmr"
+                  name="pmr"
+                  data-filter="pmr"
+                />
+                <span>Place handicapée disponible</span>
+              </label>
+
+              <label class="check">
+                <input
+                  type="checkbox"
+                  id="filter-open24"
+                  name="open24"
+                  data-filter="open24"
+                />
+                <span>Ouvert 24h/24</span>
+              </label>
+
+              <label class="check">
+                <input
+                  type="checkbox"
+                  id="filter-covered"
+                  name="covered"
+                  data-filter="covered"
+                />
+                <span>Abrité</span>
+              </label>
+            </fieldset>
+
+            <label class="field field--inline" for="sort-by">
+              <span class="field__label">Trier par</span>
+              <select class="select" id="sort-by" name="sort" data-sort>
+                <option value="walk" selected>Distance à pied</option>
+                <option value="price">Prix</option>
+                <option value="spots">Nombre de places</option>
+              </select>
+            </label>
+          </form>
+
+          <div class="results-count" role="status" aria-live="polite">
+            <span id="count-label">10 emplacements</span>
+            <span id="free-label">4 gratuits</span>
+          </div>
+
+          <div class="spot-scroll">
+            <ul class="spot-list" id="spot-list"></ul>
+
+            <p class="empty-state" id="empty-state" hidden>
+              Aucun emplacement ne correspond.<br />Élargissez la distance ou le
+              tarif.
+            </p>
+          </div>
+        </aside>
+
+        <!-- ===================== CARTE ===================== -->
+        <section class="map-area">
+          <div
+            class="map"
+            id="map"
+            role="application"
+            aria-label="Carte des emplacements de stationnement"
+          ></div>
+
+          <div class="legend">
+            <span class="legend__item">
+              <span
+                class="legend__swatch legend__swatch--free"
+                aria-hidden="true"
+              ></span
+              >Gratuit
+            </span>
+            <span class="legend__item">
+              <span
+                class="legend__swatch legend__swatch--paid"
+                aria-hidden="true"
+              ></span
+              >Payant
+            </span>
+            <span class="legend__item">
+              <span
+                class="legend__swatch legend__swatch--school"
+                aria-hidden="true"
+              ></span
+              >L'école
+            </span>
+          </div>
+
+          <!-- Fiche détaillée : masquée tant qu'aucun emplacement n'est sélectionné -->
+          <article
+            class="detail"
+            id="spot-detail"
+            aria-labelledby="detail-name"
+            hidden
+          >
+            <div class="detail__head">
+              <div class="detail__titles">
+                <div class="detail__ident">
+                  <strong class="detail__name" id="detail-name"></strong>
+                  <span class="detail__address" id="detail-address"></span>
+                </div>
+                <button
+                  type="button"
+                  class="detail__close"
+                  id="detail-close"
+                  aria-label="Fermer la fiche"
+                >
+                  ×
+                </button>
+              </div>
+              <ul class="badges badges--solid" id="detail-badges"></ul>
+            </div>
+
+            <dl class="specs">
+              <dt>Type</dt>
+              <dd id="detail-type"></dd>
+              <dt>Tarif</dt>
+              <dd class="specs__price" id="detail-price"></dd>
+              <dt>Durée max.</dt>
+              <dd id="detail-maxduration"></dd>
+              <dt>Horaires</dt>
+              <dd id="detail-hours"></dd>
+              <dt>À pied</dt>
+              <dd id="detail-walk"></dd>
+              <dt>Places</dt>
+              <dd id="detail-spots"></dd>
+              <dt>PMR</dt>
+              <dd id="detail-pmr"></dd>
+            </dl>
+
+            <p class="detail__note" id="detail-note"></p>
+
+            <div class="detail__actions">
+              <button type="button" class="btn btn--primary" id="detail-route">
+                Itinéraire à pied
+              </button>
+              <button type="button" class="btn btn--ghost" id="detail-report">
+                Signaler une erreur
+              </button>
+            </div>
+          </article>
+
+          <p class="map-credit">Leaflet · © OpenStreetMap</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- Une carte de la liste latérale -->
+    <template id="tpl-spot-card">
+      <li class="spot-card" data-id="">
+        <button type="button" class="spot-card__button">
+          <span class="spot-card__head">
+            <strong class="spot-card__name"></strong>
+            <span class="spot-card__price"></span>
+          </span>
+          <span class="spot-card__meta">
+            <span class="spot-card__walk"></span>
+            <span class="spot-card__sep" aria-hidden="true">·</span>
+            <span class="spot-card__type"></span>
+            <span class="spot-card__sep" aria-hidden="true">·</span>
+            <span class="spot-card__spots"></span>
+          </span>
+          <span class="badges badges--soft"></span>
+        </button>
+      </li>
+    </template>
+
+    <!-- Un badge : Gratuit, Abrité, 24h/24, PMR -->
+    <template id="tpl-badge">
+      <li class="badge"></li>
+    </template>
+
+    <!-- Le marqueur d'un emplacement sur la carte -->
+    <template id="tpl-marker">
+      <span class="marker">
+        <span class="marker__pulse" aria-hidden="true"></span>
+        <span class="marker__bubble"></span>
+      </span>
+    </template>
+
+    <!-- Le marqueur de l'école -->
+    <template id="tpl-school-marker">
+      <span class="school-marker">
+        <span class="school-marker__square" aria-hidden="true"></span>
+        <span class="school-marker__label">L'école</span>
+      </span>
+    </template>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="javascript.js" defer></script>
   </body>
 </html>
