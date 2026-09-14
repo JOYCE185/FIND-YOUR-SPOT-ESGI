@@ -26,7 +26,7 @@ Le site est servi en fichiers statiques depuis un VPS administré par l'équipe.
 
 ## Visiter le site
 
-[a link](https://samex-amenagement.fr/find-your-spot/)
+[Find Your Spot 🚗](https://samex-amenagement.fr/find-your-spot/)
 
 ## L'équipe
 
