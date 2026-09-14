@@ -30,12 +30,12 @@ Le site est servi en fichiers statiques depuis un VPS administré par l'équipe.
 
 ## L'équipe
 
-| Nom            | Promo | Domaine             |
-| -------------- | ----- | ------------------- |
-| Thomas TEBOUL  | A2    | Développement       |
-| Joyce BIOULE   | A1    | Développement       |
-| Leny CAMUS     | A2    | Systèmes et réseaux |
-| Tristan LURON  | A1    | Cybersécurité       |
-| Kong HELLEQUIN | A1    | Data et IA          |
+| Nom        | Promo | Domaine             |
+| ---------- | ----- | ------------------- |
+| Thomas T.  | A2    | Développement       |
+| Joyce B.   | A1    | Développement       |
+| Leny C.    | A2    | Systèmes et réseaux |
+| Tristan L. | A1    | Cybersécurité       |
+| Kong H.    | A1    | Data et IA          |
 
 Projet réalisé pendant le séminaire de prérentrée du 14 au 18 septembre 2026.
