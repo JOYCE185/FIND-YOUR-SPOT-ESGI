@@ -8,6 +8,13 @@ L.marker(ECOLE).addTo(carte).bindPopup("Campus ESGI Aix-en-Provence");
 
 window.addEventListener("resize", () => carte.invalidateSize());
 let cercle = null;
+const groupe = L.layerGroup().addTo(carte);
+let data = { parkings: [] };
+
+async function init() {
+  const reponse = await fetch("/parkings.json");
+  data = await reponse.json();
+}
 
 function updateLabel() {
   label.textContent = "≤ " + curseur.value + " m";
@@ -25,14 +32,12 @@ function updateLabel() {
 }
 
 async function chargerParkings() {
-  const reponse = await fetch("/parkings.json");
-  const data = await reponse.json();
-  let parkingsTab = [];
+  groupe.clearLayers();
 
   data.parkings.forEach((p) => {
     if (p.distance_m <= curseur.value) {
       L.marker(p.lat_long)
-        .addTo(carte)
+        .addTo(groupe)
         .bindPopup(
           `<strong>${p.nom}</strong><br>${p.tarif}<br>${p.nombre_places} places`,
         );
@@ -41,4 +46,5 @@ async function chargerParkings() {
 }
 
 curseur.addEventListener("input", updateLabel);
+init();
 updateLabel();
