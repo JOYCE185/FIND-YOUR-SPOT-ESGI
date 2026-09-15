@@ -23,5 +23,20 @@ function updateLabel() {
     fillOpacity: 0.04,
   }).addTo(carte);
 }
+
+async function chargerParkings() {
+  const reponse = await fetch("/parkings.json");
+  const data = await reponse.json();
+
+  data.parkings.forEach((p) => {
+    L.marker(p.lat_long)
+      .addTo(carte)
+      .bindPopup(
+        `<strong>${p.nom}</strong><br>${p.tarif}<br>${p.nombre_places} places`,
+      );
+  });
+}
+
 curseur.addEventListener("input", updateLabel);
 updateLabel();
+chargerParkings();
