@@ -10,6 +10,7 @@ window.addEventListener("resize", () => carte.invalidateSize());
 let cercle = null;
 const groupe = L.layerGroup().addTo(carte);
 let data = { parkings: [] };
+let ligneActive = null;
 
 async function init() {
   const reponse = await fetch("parkings.json");
@@ -29,19 +30,29 @@ function updateLabel() {
     fillOpacity: 0.04,
   }).addTo(carte);
   chargerParkings();
+  ligneActive.remove();
 }
 
-async function chargerParkings() {
+function chargerParkings() {
   groupe.clearLayers();
 
   data.parkings.forEach((p) => {
     if (p.distance_m <= curseur.value) {
-      L.marker(p.lat_long)
+      const marker = L.marker(p.lat_long)
         .addTo(groupe)
         .bindPopup(
           `<strong>${p.nom}</strong><br>${p.tarif}` +
-            (p.nombre_places ? `<br>${p.nombre_places} places` : ""),
+            (p.nombre_places ? `<br>${p.nombre_places} places` : "") +
+            `<br>${p.distance_m} mètres depuis l'école<br>`,
         );
+      marker.on("click", () => {
+        if (ligneActive) ligneActive.remove();
+        ligneActive = L.polyline([ECOLE, p.lat_long], {
+          color: "#26241f",
+          weight: 2,
+          dashArray: "4 6",
+        }).addTo(carte);
+      });
     }
   });
 }
