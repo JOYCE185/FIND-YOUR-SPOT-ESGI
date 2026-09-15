@@ -30,7 +30,7 @@ function updateLabel() {
     fillOpacity: 0.04,
   }).addTo(carte);
   chargerParkings();
-  ligneActive.remove();
+  if (ligneActive) ligneActive.remove();
 }
 
 function chargerParkings() {
@@ -40,11 +40,7 @@ function chargerParkings() {
     if (p.distance_m <= curseur.value) {
       const marker = L.marker(p.lat_long)
         .addTo(groupe)
-        .bindPopup(
-          `<strong>${p.nom}</strong><br>${p.tarif}` +
-            (p.nombre_places ? `<br>${p.nombre_places} places` : "") +
-            `<br>${p.distance_m} mètres depuis l'école<br>`,
-        );
+        .bindPopup(popupTemplate(p));
       marker.on("click", () => {
         if (ligneActive) ligneActive.remove();
         ligneActive = L.polyline([ECOLE, p.lat_long], {
