@@ -12,7 +12,7 @@ const groupe = L.layerGroup().addTo(carte);
 let data = { parkings: [] };
 
 async function init() {
-  const reponse = await fetch("/parkings.json");
+  const reponse = await fetch("parkings.json");
   data = await reponse.json();
 }
 
@@ -39,12 +39,12 @@ async function chargerParkings() {
       L.marker(p.lat_long)
         .addTo(groupe)
         .bindPopup(
-          `<strong>${p.nom}</strong><br>${p.tarif}<br>${p.nombre_places} places`,
+          `<strong>${p.nom}</strong><br>${p.tarif}` +
+            (p.nombre_places ? `<br>${p.nombre_places} places` : ""),
         );
     }
   });
 }
 
 curseur.addEventListener("input", updateLabel);
-init();
-updateLabel();
+init().then(updateLabel);
