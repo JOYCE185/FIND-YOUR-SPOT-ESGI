@@ -1,0 +1,98 @@
+{
+  "centre_recherche": {
+    "nom": "Campus Skolae",
+    "adresse": "684 Av. du Club Hippique, 13090 Aix-en-Provence",
+    "lat_long": [43.51356188950919, 5.4285869749073115]
+  },
+  "rayon_km": 3,
+  "parkings": [
+    {
+      "lat_long": [43.511418, 5.445182],
+      "nom": "Parking-relais Krypton (EFFIA)",
+      "tarif": "3,50 €/jour (forfait P+R, aller-retour bus inclus)",
+      "distance_m": 1360,
+      "nombre_places": 860,
+      "pmr": true,
+      "ouvert_24h": false,
+      "abrite": false,
+      "image": "https://lh3.googleusercontent.com/grass-cs/ACvplmMO42UQmqCLl_voWBFKQYWYtvybGaqOi1cd_e5Yp55m-o7TdkWhwNiM3yjXdFP2cz4nFryCAr3ZvouRWO6GhiEOO2rrZXffu-zFP3IdBkmuT1cOnGe7ASlNJguwOTp3P0Js1wEwuQ=s294-w294-h220-n-k-no"
+    },
+    {
+      "lat_long": [43.5264049, 5.4436793],
+      "nom": "Parking Rotonde",
+      "tarif": "≈1,90 €/h en journée (30 premières minutes gratuites)",
+      "distance_m": 1850,
+      "nombre_places": 1800,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true,
+      "image": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnpvIzkS8awbs2vd7mPLeTfrMSWxTO-F3usqSzO9pZB5xnM91flrBysaZKn7AE5FWTQVW9e8Pd24TuiakDPNSRaG0Ky_FLUJphNhhlqpSN2ZS5W3CwYB2Yo-0Xne_djchfrM98OHqIiucrr=s1360-w1360-h1020-rw"
+    },
+    {
+      "lat_long": [43.524356, 5.447751],
+      "nom": "Parking Mignet",
+      "tarif": "≈1,90 €/h en journée (même grille que la régie métropolitaine)",
+      "distance_m": 1950,
+      "nombre_places": 800,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true,
+      "image": "https://lh3.googleusercontent.com/grass-cs/ACvplmNDBa-U2XJsAtKIH3TGi-seuJ53TSqsYduCxGw-51LOcr239QVYC9fVW6jp6gVVAQjryMkKKygLMwktirrfXDNM5jbVe11wrq6C-aCUESXpbAHAdEx8LOnb2Sj2TDX-BOziXqkm=s294-w294-h220-n-k-no"
+    },
+    {
+      "lat_long": [43.533953, 5.446112],
+      "nom": "Parking Pasteur",
+      "tarif": "≈1,90 €/h en journée (2x15 min gratuites puis 1,10 €/¼h)",
+      "distance_m": 2670,
+      "nombre_places": 650,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true,
+      "image": "https://lh3.googleusercontent.com/grass-cs/ACvplmOJoAvAd4pjsYz0-aM9EuqsFu5F2kn981eqAmcdptqtCSglFD668r6uWGtRKzF2fcd3WH2BmZMvaNSzIkXSAPYXSXhMCksT38AkoIL-veqejZB3JcGB9XUEZIK-SrWWzYFUZhHtBQ=s294-w294-h220-n-k-no"
+    },
+    {
+      "lat_long": [43.520276, 5.425038],
+      "nom": "Parking de la Fondation Vasarely",
+      "tarif": "Free",
+      "distance_m": 800,
+      "nombre_places": 50,
+      "pmr": false,
+      "ouvert_24h": false,
+      "abrite": false,
+      "image": "https://lh3.googleusercontent.com/grass-cs/ACvplmPB-nCmTNOjFCNZ6Zqhk8BCZ27u6QvJGTXNQmuxzEGZGOb8y8ZyEw0es5Uo1bzv0SFY6gnnK3DNgnGSSADCdqZtAlnrePRBmtMcQPrV0gzHicKT1DwAfj9dE1HZXCO3ngCToH6Lng=s294-w294-h220-n-k-no"
+    },
+    {
+      "lat_long": [43.5213948, 5.4325013],
+      "nom": "Parking gratuit (secteur Jas de Bouffan)",
+      "tarif": "Free",
+      "distance_m": 920,
+      "nombre_places": 15,
+      "pmr": false,
+      "ouvert_24h": true,
+      "abrite": false,
+      "image": null
+    },
+    {
+      "lat_long": [43.532825, 5.418087],
+      "nom": "Parking du centre commercial Jas de Bouffan",
+      "tarif": "Free",
+      "distance_m": 2300,
+      "nombre_places": 1565,
+      "pmr": true,
+      "ouvert_24h": false,
+      "abrite": false,
+      "image": "https://lh3.googleusercontent.com/grass-cs/ACvplmOpPdSKexKDuaSEoiWRP49XuzmIxzFxV624S778EiQmMHPxO9aEXhR1dII_Qut5OI4GWOpFOVPdxfA5dryMZ3HRUbks161TM_72ODfdo3I0XMQNZmZxWW6WPB2lWDbUDdsxRj_l5A=s294-w294-h220-n-k-no"
+    },
+    {
+      "lat_long": [43.510221, 5.443047],
+      "nom": "Parking covoiturage Pont-de-l'Arc",
+      "tarif": "Free",
+      "distance_m": 1220,
+      "nombre_places": 30,
+      "pmr": false,
+      "ouvert_24h": true,
+      "abrite": false,
+      "image": null
+    }
+  ]
+}
