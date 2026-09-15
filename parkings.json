@@ -1,0 +1,90 @@
+{
+  "centre_recherche": {
+    "nom": "Campus Skolae",
+    "adresse": "684 Av. du Club Hippique, 13090 Aix-en-Provence",
+    "lat_long": [43.51356188950919, 5.4285869749073115]
+  },
+  "rayon_km": 3,
+  "parkings": [
+    {
+      "lat_long": [43.511418, 5.445182],
+      "nom": "Parking-relais Krypton (EFFIA)",
+      "tarif": "3,50 €/jour (forfait P+R, aller-retour bus inclus)",
+      "distance_m": "~1360 m",
+      "nombre_places": 860,
+      "pmr": true,
+      "ouvert_24h": false,
+      "abrite": false
+    },
+    {
+      "lat_long": [43.5264049, 5.4436793],
+      "nom": "Parking Rotonde",
+      "tarif": "≈1,90 €/h en journée (30 premières minutes gratuites)",
+      "distance_m": "~1850 m",
+      "nombre_places": 1800,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true
+    },
+    {
+      "lat_long": [43.524356, 5.447751],
+      "nom": "Parking Mignet",
+      "tarif": "≈1,90 €/h en journée (même grille que la régie métropolitaine)",
+      "distance_m": "~1950 m",
+      "nombre_places": 800,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true
+    },
+    {
+      "lat_long": [43.533953, 5.446112],
+      "nom": "Parking Pasteur",
+      "tarif": "≈1,90 €/h en journée (2x15 min gratuites puis 1,10 €/¼h)",
+      "distance_m": "~2670 m",
+      "nombre_places": 650,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": true
+    },
+    {
+      "lat_long": [43.520276, 5.425038],
+      "nom": "Parking de la Fondation Vasarely",
+      "tarif": "Free",
+      "distance_m": "~800 m",
+      "nombre_places": 50,
+      "pmr": false,
+      "ouvert_24h": false,
+      "abrite": false
+    },
+    {
+      "lat_long": [43.5213948, 5.4325013],
+      "nom": "Parking gratuit (secteur Jas de Bouffan)",
+      "tarif": "Free",
+      "distance_m": "~920 m",
+      "nombre_places": 15,
+      "pmr": false,
+      "ouvert_24h": true,
+      "abrite": false
+    },
+    {
+      "lat_long": [43.532825, 5.418087],
+      "nom": "Parking du centre commercial Jas de Bouffan",
+      "tarif": "Free",
+      "distance_m": "~2300 m",
+      "nombre_places": 1565,
+      "pmr": true,
+      "ouvert_24h": false,
+      "abrite": false
+    },
+    {
+      "lat_long": [43.510221, 5.443047],
+      "nom": "Parking covoiturage Pont-de-l'Arc",
+      "tarif": "Free",
+      "distance_m": "~1220 m",
+      "nombre_places": 30,
+      "pmr": false,
+      "ouvert_24h": true,
+      "abrite": false
+    }
+  ]
+}
