@@ -5,7 +5,6 @@ const label = document.getElementById("walk-label");
 const carte = L.map("map").setView(ECOLE, 15);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(carte);
 L.marker(ECOLE).addTo(carte).bindPopup("Campus ESGI Aix-en-Provence");
-L.control.zoom({ position: "bottomright" }).addTo(carte);
 
 window.addEventListener("resize", () => carte.invalidateSize());
 let cercle = null;
@@ -22,21 +21,24 @@ function updateLabel() {
     fillColor: "#26241f",
     fillOpacity: 0.04,
   }).addTo(carte);
+  chargerParkings();
 }
 
 async function chargerParkings() {
   const reponse = await fetch("/parkings.json");
   const data = await reponse.json();
+  let parkingsTab = [];
 
   data.parkings.forEach((p) => {
-    L.marker(p.lat_long)
-      .addTo(carte)
-      .bindPopup(
-        `<strong>${p.nom}</strong><br>${p.tarif}<br>${p.nombre_places} places`,
-      );
+    if (p.distance_m <= curseur.value) {
+      L.marker(p.lat_long)
+        .addTo(carte)
+        .bindPopup(
+          `<strong>${p.nom}</strong><br>${p.tarif}<br>${p.nombre_places} places`,
+        );
+    }
   });
 }
 
 curseur.addEventListener("input", updateLabel);
 updateLabel();
-chargerParkings();
