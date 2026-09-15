@@ -33,13 +33,14 @@ function updateLabel() {
   if (ligneActive) ligneActive.remove();
 }
 
-async function chargerParkings() {
+function chargerParkings() {
   groupe.clearLayers();
 
   data.parkings.forEach((p) => {
     if (p.distance_m <= curseur.value) {
-      const marker = L.marker(p.lat_long).addTo(groupe).bindPopup(popupTemplate(p));
-      
+      const marker = L.marker(p.lat_long)
+        .addTo(groupe)
+        .bindPopup(popupTemplate(p));
       marker.on("click", () => {
         if (ligneActive) ligneActive.remove();
         ligneActive = L.polyline([ECOLE, p.lat_long], {
