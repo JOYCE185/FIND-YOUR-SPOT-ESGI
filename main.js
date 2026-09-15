@@ -12,6 +12,20 @@ const groupe = L.layerGroup().addTo(carte);
 let data = { parkings: [] };
 let ligneActive = null;
 
+carte.locate({ setView: true, maxZoom: 16 });
+
+carte.on("locationfound", function (e) {
+  var radius = e.accuracy;
+  L.marker(e.latlng)
+    .addTo(carte)
+    .openPopup();
+  L.circle(e.latlng, radius).addTo(carte);
+});
+
+carte.on("locationerror", function (e) {
+  console.error(e.message);
+});
+
 async function init() {
   const reponse = await fetch("parkings.json");
   data = await reponse.json();
