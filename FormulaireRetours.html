@@ -1,407 +1,554 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avis testeurs — Carte du stationnement G01</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --sign-blue: #1d3a5f;
-    --sign-blue-dark: #14283f;
-    --amber: #e8a33d;
-    --amber-dark: #c8862a;
-    --paper: #f6f5f1;
-    --ink: #1b1f27;
-    --ink-soft: #565d68;
-    --line: #d8d6cd;
-    --ok-green: #2f7a4f;
-  }
-  *{ box-sizing: border-box; }
-  body{
-    margin:0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    line-height: 1.5;
-  }
-  .wrap{
-    max-width: 560px;
-    margin: 0 auto;
-    padding-bottom: 64px;
-  }
-  header.banner{
-    background: var(--sign-blue);
-    color: #fff;
-    padding: 36px 24px 28px;
-    position: relative;
-  }
-  header.banner::after{
-    content:"";
-    position:absolute; left:0; right:0; bottom:-8px;
-    height:8px;
-    background: repeating-linear-gradient(45deg, var(--amber), var(--amber) 10px, var(--sign-blue-dark) 10px, var(--sign-blue-dark) 20px);
-  }
-  header.banner .eyebrow{
-    display:inline-block;
-    border: 1.5px solid rgba(255,255,255,0.55);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 12.5px;
-    letter-spacing: 0.02em;
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 14px;
-  }
-  header.banner h1{
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 1.15;
-    margin: 0 0 8px;
-  }
-  header.banner p{
-    margin:0;
-    color: rgba(255,255,255,0.82);
-    font-size: 15px;
-    max-width: 42ch;
-  }
-  .stats{
-    margin: 24px 24px 0;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px 20px;
-    display:flex;
-    align-items:center;
-    gap: 22px;
-  }
-  .stats .num{
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 40px;
-    color: var(--sign-blue);
-    line-height: 1;
-    min-width: 56px;
-  }
-  .stats .num-label{
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-top: 4px;
-  }
-  .stats .divider{
-    width:1px; align-self:stretch;
-    background: var(--line);
-  }
-  .stats .avg{
-    display:flex; flex-direction:column; gap:2px;
-  }
-  .stats .avg-val{
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .stats .avg-val small{
-    font-weight:400; color: var(--ink-soft);
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avis testeurs — Carte du stationnement G01</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sign-blue: #1d3a5f;
+        --sign-blue-dark: #14283f;
+        --amber: #e8a33d;
+        --amber-dark: #c8862a;
+        --paper: #f6f5f1;
+        --ink: #1b1f27;
+        --ink-soft: #565d68;
+        --line: #d8d6cd;
+        --ok-green: #2f7a4f;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      .wrap {
+        max-width: 560px;
+        margin: 0 auto;
+        padding-bottom: 64px;
+      }
+      header.banner {
+        background: var(--sign-blue);
+        color: #fff;
+        padding: 36px 24px 28px;
+        position: relative;
+      }
+      header.banner::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 8px;
+        background: repeating-linear-gradient(
+          45deg,
+          var(--amber),
+          var(--amber) 10px,
+          var(--sign-blue-dark) 10px,
+          var(--sign-blue-dark) 20px
+        );
+      }
+      header.banner .eyebrow {
+        display: inline-block;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12.5px;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 14px;
+      }
+      header.banner h1 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 1.15;
+        margin: 0 0 8px;
+      }
+      header.banner p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 15px;
+        max-width: 42ch;
+      }
+      .stats {
+        margin: 24px 24px 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .stats .num {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 40px;
+        color: var(--sign-blue);
+        line-height: 1;
+        min-width: 56px;
+      }
+      .stats .num-label {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 4px;
+      }
+      .stats .divider {
+        width: 1px;
+        align-self: stretch;
+        background: var(--line);
+      }
+      .stats .avg {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .stats .avg-val {
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .stats .avg-val small {
+        font-weight: 400;
+        color: var(--ink-soft);
+      }
 
-  form{
-    margin: 28px 24px 0;
-  }
-  .q{
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .q:first-child{ padding-top: 0; }
-  .q label.qtitle{
-    display:block;
-    font-weight: 600;
-    font-size: 15.5px;
-    margin-bottom: 12px;
-  }
-  .stars{
-    display:flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-  .stars input{ position:absolute; opacity:0; width:0; height:0; }
-  .stars .star{
-    font-size: 30px;
-    cursor:pointer;
-    color: #cfd0c9;
-    transition: color .15s ease, transform .1s ease;
-    user-select:none;
-  }
-  .stars .star:hover{ transform: translateY(-1px); }
-  /* étoile cochée + toutes celles qui la précèdent visuellement (soeurs suivantes en DOM, grâce à row-reverse) */
-  .stars input:checked ~ .star{
-    color: var(--amber);
-  }
-  .stars:hover .star:hover,
-  .stars:hover .star:hover ~ .star{
-    color: var(--amber-dark);
-  }
-  .choice-row{
-    display:flex; gap: 10px; flex-wrap: wrap;
-  }
-  .choice-row input{ position:absolute; opacity:0; width:0; height:0; }
-  .choice-row label{
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    padding: 9px 16px;
-    font-size: 14.5px;
-    cursor:pointer;
-    color: var(--ink);
-    background: #fff;
-    transition: border-color .15s, background .15s;
-  }
-  .choice-row input:checked + label{
-    border-color: var(--sign-blue);
-    background: var(--sign-blue);
-    color: #fff;
-  }
-  textarea{
-    width:100%;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-family: inherit;
-    font-size: 14.5px;
-    resize: vertical;
-    min-height: 78px;
-    background:#fff;
-  }
-  textarea:focus, .choice-row label:focus-within, .star:focus-within{
-    outline: 2px solid var(--sign-blue);
-    outline-offset: 2px;
-  }
-  .hint{
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-top: 6px;
-  }
-  button.submit{
-    width:100%;
-    margin-top: 28px;
-    background: var(--amber);
-    color: var(--sign-blue-dark);
-    border:none;
-    border-radius: 9px;
-    padding: 15px 18px;
-    font-size: 15.5px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor:pointer;
-    transition: background .15s;
-  }
-  button.submit:hover{ background: var(--amber-dark); }
-  button.submit:disabled{ opacity: .55; cursor: default; }
-  .error{
-    color: #a33636;
-    font-size: 13.5px;
-    margin-top: 10px;
-    display:none;
-  }
-  .thanks{
-    margin: 28px 24px 0;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 28px 22px;
-    text-align:center;
-    display:none;
-  }
-  .thanks .check{
-    width: 42px; height:42px;
-    border-radius: 50%;
-    background: var(--ok-green);
-    color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    font-size: 22px;
-    margin: 0 auto 14px;
-  }
-  .thanks h2{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size: 20px;
-    margin: 0 0 6px;
-  }
-  .thanks p{
-    color: var(--ink-soft);
-    font-size: 14.5px;
-    margin:0;
-  }
-  .loading-note{
-    font-size: 13px; color: var(--ink-soft); margin-top:6px;
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <header class="banner">
-    <a href="index.html" style="color:rgba(255,255,255,0.75); font-size:13.5px; text-decoration:none; display:inline-block; margin-bottom:14px;">Retour à la carte</a><br>
-    <span class="eyebrow">Groupe G01 — projet parking</span>
-    <h1>Votre avis sur la carte</h1>
-    <p>Vous avez testé la carte de stationnement autour de l'école ? Cinq questions rapides pour nous aider à l'améliorer.</p>
-  </header>
+      form {
+        margin: 28px 24px 0;
+      }
+      .q {
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .q:first-child {
+        padding-top: 0;
+      }
+      .q label.qtitle {
+        display: block;
+        font-weight: 600;
+        font-size: 15.5px;
+        margin-bottom: 12px;
+      }
+      .stars {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+      .stars input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .stars .star {
+        font-size: 30px;
+        cursor: pointer;
+        color: #cfd0c9;
+        transition:
+          color 0.15s ease,
+          transform 0.1s ease;
+        user-select: none;
+      }
+      .stars .star:hover {
+        transform: translateY(-1px);
+      }
+      /* étoile cochée + toutes celles qui la précèdent visuellement (soeurs suivantes en DOM, grâce à row-reverse) */
+      .stars input:checked ~ .star {
+        color: var(--amber);
+      }
+      .stars:hover .star:hover,
+      .stars:hover .star:hover ~ .star {
+        color: var(--amber-dark);
+      }
+      .choice-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .choice-row input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .choice-row label {
+        border: 1.5px solid var(--line);
+        border-radius: 8px;
+        padding: 9px 16px;
+        font-size: 14.5px;
+        cursor: pointer;
+        color: var(--ink);
+        background: #fff;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+      }
+      .choice-row input:checked + label {
+        border-color: var(--sign-blue);
+        background: var(--sign-blue);
+        color: #fff;
+      }
+      textarea {
+        width: 100%;
+        border: 1.5px solid var(--line);
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-family: inherit;
+        font-size: 14.5px;
+        resize: vertical;
+        min-height: 78px;
+        background: #fff;
+      }
+      textarea:focus,
+      .choice-row label:focus-within,
+      .star:focus-within {
+        outline: 2px solid var(--sign-blue);
+        outline-offset: 2px;
+      }
+      .hint {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 6px;
+      }
+      button.submit {
+        width: 100%;
+        margin-top: 28px;
+        background: var(--amber);
+        color: var(--sign-blue-dark);
+        border: none;
+        border-radius: 9px;
+        padding: 15px 18px;
+        font-size: 15.5px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      button.submit:hover {
+        background: var(--amber-dark);
+      }
+      button.submit:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .error {
+        color: #a33636;
+        font-size: 13.5px;
+        margin-top: 10px;
+        display: none;
+      }
+      .thanks {
+        margin: 28px 24px 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 28px 22px;
+        text-align: center;
+        display: none;
+      }
+      .thanks .check {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--ok-green);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin: 0 auto 14px;
+      }
+      .thanks h2 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 20px;
+        margin: 0 0 6px;
+      }
+      .thanks p {
+        color: var(--ink-soft);
+        font-size: 14.5px;
+        margin: 0;
+      }
+      .loading-note {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="banner">
+        <a
+          href="index.html"
+          style="
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13.5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 14px;
+          "
+          >Retour à la carte</a
+        ><br />
+        <span class="eyebrow">Groupe G01 — projet parking</span>
+        <h1>Votre avis sur la carte</h1>
+        <p>
+          Vous avez testé la carte de stationnement autour de l'école ? Cinq
+          questions rapides pour nous aider à l'améliorer.
+        </p>
+      </header>
 
-  <div class="stats">
-    <div>
-      <div class="num" id="statCount">–</div>
-      <div class="num-label">avis reçus</div>
-    </div>
-    <div class="divider"></div>
-    <div class="avg">
-      <div class="avg-val" id="statAvg">– <small>/ 5 de moyenne</small></div>
-      <div class="loading-note" id="statLoading">Chargement des avis…</div>
-    </div>
-  </div>
+      <div class="stats">
+        <div>
+          <div class="num" id="statCount">–</div>
+          <div class="num-label">avis reçus</div>
+        </div>
+        <div class="divider"></div>
+        <div class="avg">
+          <div class="avg-val" id="statAvg">
+            – <small>/ 5 de moyenne</small>
+          </div>
+          <div class="loading-note" id="statLoading">Chargement des avis…</div>
+        </div>
+      </div>
 
-  <form id="feedbackForm">
-    <div class="q">
-      <label class="qtitle">1. Note globale de votre expérience</label>
-      <div class="stars" id="starGroup" role="radiogroup" aria-label="Note sur 5">
-        <input type="radio" name="note" id="s5" value="5"><label class="star" for="s5">★</label>
-        <input type="radio" name="note" id="s4" value="4"><label class="star" for="s4">★</label>
-        <input type="radio" name="note" id="s3" value="3"><label class="star" for="s3">★</label>
-        <input type="radio" name="note" id="s2" value="2"><label class="star" for="s2">★</label>
-        <input type="radio" name="note" id="s1" value="1"><label class="star" for="s1">★</label>
+      <form id="feedbackForm">
+        <div class="q">
+          <label class="qtitle">1. Note globale de votre expérience</label>
+          <div
+            class="stars"
+            id="starGroup"
+            role="radiogroup"
+            aria-label="Note sur 5"
+          >
+            <input type="radio" name="note" id="s5" value="5" /><label
+              class="star"
+              for="s5"
+              >★</label
+            >
+            <input type="radio" name="note" id="s4" value="4" /><label
+              class="star"
+              for="s4"
+              >★</label
+            >
+            <input type="radio" name="note" id="s3" value="3" /><label
+              class="star"
+              for="s3"
+              >★</label
+            >
+            <input type="radio" name="note" id="s2" value="2" /><label
+              class="star"
+              for="s2"
+              >★</label
+            >
+            <input type="radio" name="note" id="s1" value="1" /><label
+              class="star"
+              for="s1"
+              >★</label
+            >
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qtitle"
+            >2. Avez-vous trouvé une place facilement grâce à la carte ?</label
+          >
+          <div class="choice-row">
+            <input type="radio" name="facile" id="f_oui" value="oui" /><label
+              for="f_oui"
+              >Oui</label
+            >
+            <input
+              type="radio"
+              name="facile"
+              id="f_partiel"
+              value="partiellement"
+            /><label for="f_partiel">Partiellement</label>
+            <input type="radio" name="facile" id="f_non" value="non" /><label
+              for="f_non"
+              >Non</label
+            >
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qtitle"
+            >3. Les filtres (prix, distance, PMR, 24h/24, abrité) vous ont-ils
+            été utiles ?</label
+          >
+          <div class="choice-row">
+            <input type="radio" name="filtres" id="ft_oui" value="oui" /><label
+              for="ft_oui"
+              >Oui</label
+            >
+            <input type="radio" name="filtres" id="ft_non" value="non" /><label
+              for="ft_non"
+              >Non</label
+            >
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qtitle" for="amelioration"
+            >4. Qu'est-ce qui pourrait être amélioré ?</label
+          >
+          <textarea
+            id="amelioration"
+            name="amelioration"
+            placeholder="Une place manquante, un filtre qui manque, un bug…"
+          ></textarea>
+        </div>
+
+        <div class="q">
+          <label class="qtitle"
+            >5. Recommanderiez-vous ce site à un autre étudiant ?</label
+          >
+          <div class="choice-row">
+            <input
+              type="radio"
+              name="recommande"
+              id="r_oui"
+              value="oui"
+            /><label for="r_oui">Oui</label>
+            <input
+              type="radio"
+              name="recommande"
+              id="r_non"
+              value="non"
+            /><label for="r_non">Non</label>
+          </div>
+        </div>
+
+        <div class="error" id="formError">
+          Merci de répondre aux questions 1, 2, 3 et 5 avant d'envoyer.
+        </div>
+        <button type="submit" class="submit" id="submitBtn">
+          Envoyer mon avis
+        </button>
+      </form>
+
+      <div class="thanks" id="thanks">
+        <div class="check">✓</div>
+        <h2>Merci pour votre retour</h2>
+        <p>Votre avis vient d'être ajouté au compteur ci-dessus.</p>
       </div>
     </div>
 
-    <div class="q">
-      <label class="qtitle">2. Avez-vous trouvé une place facilement grâce à la carte ?</label>
-      <div class="choice-row">
-        <input type="radio" name="facile" id="f_oui" value="oui"><label for="f_oui">Oui</label>
-        <input type="radio" name="facile" id="f_partiel" value="partiellement"><label for="f_partiel">Partiellement</label>
-        <input type="radio" name="facile" id="f_non" value="non"><label for="f_non">Non</label>
-      </div>
-    </div>
+    <script>
+      const PREFIX = "g01-avis:";
 
-    <div class="q">
-      <label class="qtitle">3. Les filtres (prix, distance, PMR, 24h/24, abrité) vous ont-ils été utiles ?</label>
-      <div class="choice-row">
-        <input type="radio" name="filtres" id="ft_oui" value="oui"><label for="ft_oui">Oui</label>
-        <input type="radio" name="filtres" id="ft_non" value="non"><label for="ft_non">Non</label>
-      </div>
-    </div>
+      function uid() {
+        return (
+          Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8)
+        );
+      }
 
-    <div class="q">
-      <label class="qtitle" for="amelioration">4. Qu'est-ce qui pourrait être amélioré ?</label>
-      <textarea id="amelioration" name="amelioration" placeholder="Une place manquante, un filtre qui manque, un bug…"></textarea>
-    </div>
+      async function loadStats() {
+        const loadingEl = document.getElementById("statLoading");
+        try {
+          let notes = [];
+          let count = 0;
 
-    <div class="q">
-      <label class="qtitle">5. Recommanderiez-vous ce site à un autre étudiant ?</label>
-      <div class="choice-row">
-        <input type="radio" name="recommande" id="r_oui" value="oui"><label for="r_oui">Oui</label>
-        <input type="radio" name="recommande" id="r_non" value="non"><label for="r_non">Non</label>
-      </div>
-    </div>
-
-    <div class="error" id="formError">Merci de répondre aux questions 1, 2, 3 et 5 avant d'envoyer.</div>
-    <button type="submit" class="submit" id="submitBtn">Envoyer mon avis</button>
-  </form>
-
-  <div class="thanks" id="thanks">
-    <div class="check">✓</div>
-    <h2>Merci pour votre retour</h2>
-    <p>Votre avis vient d'être ajouté au compteur ci-dessus.</p>
-  </div>
-</div>
-
-<script>
-  const PREFIX = 'g01-avis:';
-
-  function uid(){
-    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8);
-  }
-
-  async function loadStats(){
-    const loadingEl = document.getElementById('statLoading');
-    try{
-      let notes = [];
-      let count = 0;
-
-      // Parcours de toutes les clés enregistrées dans localStorage
-      for(let i = 0; i < localStorage.length; i++){
-        const key = localStorage.key(i);
-        if(key && key.startsWith(PREFIX)){
-          count++;
-          try{
-            const val = localStorage.getItem(key);
-            if(val){
-              const d = JSON.parse(val);
-              if(typeof d.note === 'number' && !isNaN(d.note)) notes.push(d.note);
+          // Parcours de toutes les clés enregistrées dans localStorage
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(PREFIX)) {
+              count++;
+              try {
+                const val = localStorage.getItem(key);
+                if (val) {
+                  const d = JSON.parse(val);
+                  if (typeof d.note === "number" && !isNaN(d.note))
+                    notes.push(d.note);
+                }
+              } catch (e) {
+                /* entrée corrompue, on l'ignore */
+              }
             }
-          }catch(e){ /* entrée corrompue, on l'ignore */ }
+          }
+
+          const avg = notes.length
+            ? notes.reduce((a, b) => a + b, 0) / notes.length
+            : 0;
+          document.getElementById("statCount").textContent = count;
+          document.getElementById("statAvg").innerHTML =
+            (count ? avg.toFixed(1) : "–") + " <small>/ 5 de moyenne</small>";
+          loadingEl.style.display = "none";
+        } catch (e) {
+          loadingEl.textContent = "Compteur indisponible pour le moment.";
+          console.error("Erreur de chargement des stats", e);
         }
       }
 
-      const avg = notes.length ? (notes.reduce((a,b)=>a+b,0)/notes.length) : 0;
-      document.getElementById('statCount').textContent = count;
-      document.getElementById('statAvg').innerHTML = (count ? avg.toFixed(1) : '–') + ' <small>/ 5 de moyenne</small>';
-      loadingEl.style.display = 'none';
-    }catch(e){
-      loadingEl.textContent = 'Compteur indisponible pour le moment.';
-      console.error('Erreur de chargement des stats', e);
-    }
-  }
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", async function (ev) {
+          ev.preventDefault();
+          const form = ev.target;
+          const errorEl = document.getElementById("formError");
+          const btn = document.getElementById("submitBtn");
 
-  document.getElementById('feedbackForm').addEventListener('submit', async function(ev){
-    ev.preventDefault();
-    const form = ev.target;
-    const errorEl = document.getElementById('formError');
-    const btn = document.getElementById('submitBtn');
+          const note = form.querySelector('input[name="note"]:checked');
+          const facile = form.querySelector('input[name="facile"]:checked');
+          const filtres = form.querySelector('input[name="filtres"]:checked');
+          const recommande = form.querySelector(
+            'input[name="recommande"]:checked',
+          );
+          const amelioration = form.querySelector("#amelioration").value.trim();
 
-    const note = form.querySelector('input[name="note"]:checked');
-    const facile = form.querySelector('input[name="facile"]:checked');
-    const filtres = form.querySelector('input[name="filtres"]:checked');
-    const recommande = form.querySelector('input[name="recommande"]:checked');
-    const amelioration = form.querySelector('#amelioration').value.trim();
+          if (!note || !facile || !filtres || !recommande) {
+            errorEl.style.display = "block";
+            return;
+          }
+          errorEl.style.display = "none";
 
-    if(!note || !facile || !filtres || !recommande){
-      errorEl.style.display = 'block';
-      return;
-    }
-    errorEl.style.display = 'none';
+          const entry = {
+            note: parseInt(note.value, 10),
+            facile: facile.value,
+            filtres_utiles: filtres.value,
+            amelioration: amelioration || null,
+            recommande: recommande.value,
+            horodatage: new Date().toISOString(),
+          };
 
-    const entry = {
-      note: parseInt(note.value, 10),
-      facile: facile.value,
-      filtres_utiles: filtres.value,
-      amelioration: amelioration || null,
-      recommande: recommande.value,
-      horodatage: new Date().toISOString()
-    };
+          btn.disabled = true;
+          btn.textContent = "Envoi…";
 
-    btn.disabled = true;
-    btn.textContent = 'Envoi…';
+          try {
+            localStorage.setItem(PREFIX + uid(), JSON.stringify(entry));
+            if (!result) {
+              throw new Error("Échec de l'enregistrement");
+            }
+            form.style.display = "none";
+            document.getElementById("thanks").style.display = "block";
+            await loadStats();
+          } catch (e) {
+            console.error("Erreur d'envoi", e);
+            errorEl.textContent =
+              "L'envoi a échoué, réessayez dans un instant.";
+            errorEl.style.display = "block";
+            btn.disabled = false;
+            btn.textContent = "Envoyer mon avis";
+          }
+        });
 
-    try{
-      localStorage.setItem(PREFIX + uid(), JSON.stringify(entry));
-      if(!result){
-        throw new Error('Échec de l\'enregistrement');
-      }
-      form.style.display = 'none';
-      document.getElementById('thanks').style.display = 'block';
-      await loadStats();
-    }catch(e){
-      console.error('Erreur d\'envoi', e);
-      errorEl.textContent = 'L\'envoi a échoué, réessayez dans un instant.';
-      errorEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Envoyer mon avis';
-    }
-  });
-
-  loadStats();
-  // Écouter les modifications venant d'autres onglets
-  window.addEventListener('storage', (event) => {
-    if (event.key && event.key.startsWith(PREFIX)) {
       loadStats();
-    }
-  });
-</script>
-</body>
+      // Écouter les modifications venant d'autres onglets
+      window.addEventListener("storage", (event) => {
+        if (event.key && event.key.startsWith(PREFIX)) {
+          loadStats();
+        }
+      });
+    </script>
+  </body>
 </html>
