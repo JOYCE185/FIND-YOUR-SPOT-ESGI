@@ -1,5 +1,5 @@
 function popupTemplate(p) {
-  const estGratuit = p.tarif === 'Gratuit';
+  const estGratuit = p.tarif === 'Free';
   const tarifTexte = estGratuit ? "Gratuit" : p.tarif || "Tarif non renseigné";
 
   const photoHtml = p.image
