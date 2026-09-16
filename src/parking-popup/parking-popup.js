@@ -1,9 +1,5 @@
-// Script classique (pas de module) : la fonction est exposée globalement
-// pour être appelée depuis main.js. Champs attendus, au format réel de
-// parkings.json : nom, tarif (texte), distance_m, nombre_places, pmr,
-// ouvert_24h, abrite, image.
 function popupTemplate(p) {
-  const estGratuit = /free|gratuit/i.test(p.tarif || "");
+  const estGratuit = p.tarif === 'Gratuit';
   const tarifTexte = estGratuit ? "Gratuit" : p.tarif || "Tarif non renseigné";
 
   const photoHtml = p.image
@@ -31,6 +27,17 @@ function popupTemplate(p) {
           ${p.ouvert_24h ? '<span class="parking-card__badge">🌙 24h/24</span>' : ""}
           ${p.abrite ? '<span class="parking-card__badge">🏠 Abrité</span>' : '<span class="parking-card__badge">☀️ Plein air</span>'}
         </div>
+      </div>
+    </div>
+  `;
+}
+
+function schoolPopupTemplate() {
+  return `
+    <div class="parking-card">
+      <img class="parking-card__photo" src="https://imgs.search.brave.com/Us3aRXMKbEtxbc0BNuqCjSyuSBGDX4RW_lA8IMjAAI0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZXNnaS5mci9fYXNz/ZXRzL3d3dy5lc2dp/LmZyL2Vjb2xlLWlu/Zm9ybWF0aXF1ZS9B/aXgtY2FtcHVzLTEu/cG5n" alt="Campus Skolae">
+      <div class="parking-card__body">
+        <p class="parking-card__title">Campus Skolae Aix-en-Provence</p>
       </div>
     </div>
   `;
