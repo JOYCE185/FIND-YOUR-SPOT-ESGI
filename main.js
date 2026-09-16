@@ -29,6 +29,8 @@ window.addEventListener("resize", () => carte.invalidateSize());
 let cercle = null;
 const groupe = L.layerGroup().addTo(carte);
 let data = { parkings: [] };
+const markersById = new Map();
+
 let ligneActive = null;
 
 carte.locate({ setView: true, maxZoom: 16 });
@@ -43,8 +45,16 @@ carte.on("locationerror", function (e) {
 });
 
 async function init() {
-  const reponse = await fetch("parkings.json");
+  const reponse = await fetch("/parkings.json");
   data = await reponse.json();
+
+  // Statut en direct de tous les parkings, récupéré en un seul appel
+  const statuses = await fetchAllStatuses();
+  data.parkings.forEach((p) => {
+    p.liveStatus = statuses[p.id] || null;
+  });
+
+  chargerParkings();
 }
 
 function updateLabel() {
@@ -65,6 +75,7 @@ function updateLabel() {
 
 function chargerParkings() {
   groupe.clearLayers();
+  markersById.clear();
 
   data.parkings.forEach((parking) => {
     if (parking.distance_m <= curseur.value) {
@@ -76,6 +87,13 @@ function chargerParkings() {
       })
         .addTo(groupe)
         .bindPopup(popupTemplate(parking));
+      markersById.set(parking.id, marker);
+
+      // Au cas où le statut aurait changé depuis le chargement de la page
+      marker.on("popupopen", async () => {
+        parking.liveStatus = await fetchStatus(parking.id);
+        marker.setPopupContent(popupTemplate(parking));
+      });
 
       marker.on("click", () => {
         if (ligneActive) ligneActive.remove();
@@ -89,5 +107,30 @@ function chargerParkings() {
   });
 }
 
+// Appelée par les boutons "🟢 Libre / 🟡 Quelques / 🟠 Peu / 🔴 Complet"
+// générés dans popup-template.js.
+window.handleReport = async function (id, status) {
+  const card = document.querySelector(`.live-status[data-parking-id="${id}"]`);
+  const boutons = card ? card.querySelectorAll(".live-status__btn") : [];
+  const feedback = card ? card.querySelector("[data-feedback]") : null;
+
+  boutons.forEach((b) => (b.disabled = true));
+
+  const resultat = await reportStatus(id, status);
+
+  if (resultat.error) {
+    if (feedback) feedback.textContent = resultat.error;
+    boutons.forEach((b) => (b.disabled = false));
+    return;
+  }
+
+  const p = data.parkings.find((pk) => pk.id === id);
+  if (p) p.liveStatus = resultat;
+
+  const marqueur = markersById.get(id);
+  if (marqueur && p) marqueur.setPopupContent(popupTemplate(p));
+};
+
 curseur.addEventListener("input", updateLabel);
-init().then(updateLabel);
+updateLabel(); // affiche le cercle de distance immédiatement
+init(); // charge parkings.json + statuts, puis affiche les marqueurs
