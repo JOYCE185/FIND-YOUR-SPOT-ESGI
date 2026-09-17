@@ -640,6 +640,40 @@ input {
   gap: 8px;
 }
 
+/* ------------------------------------------------------------
+   8.1 Point de statut en direct sur le marqueur
+   ------------------------------------------------------------ */
+
+.marker-wrap {
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.marker-wrap svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.marker-status-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.marker-status-dot--libre { background: #2e9e4b; }
+.marker-status-dot--quelques { background: #e0b400; }
+.marker-status-dot--peu { background: #e0791f; }
+.marker-status-dot--complet { background: #d33a2c; }
+.marker-status-dot--unknown { background: #a9a49a; }
+
 .school-marker__square {
   width: 14px;
   height: 14px;
@@ -805,30 +839,136 @@ input {
 }
 
 /* ------------------------------------------------------------
+   11.5 Tiroir de filtres mobile
+   ------------------------------------------------------------ */
+
+.filters-toggle {
+  display: none;
+}
+
+.panel-close {
+  display: none;
+}
+
+.filters-backdrop {
+  display: none;
+}
+
+/* ------------------------------------------------------------
    11. Écrans étroits
    ------------------------------------------------------------ */
 
 @media (max-width: 860px) {
+  .app {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
   .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .panel {
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .spot-scroll {
-    max-height: 340px;
+    display: block;
+    min-height: 0;
   }
 
   .map-area {
-    min-height: 70vh;
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* Panneau : masqué par défaut, glisse depuis la gauche */
+  .panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 700;
+    width: min(86vw, 360px);
+    border-right: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .panel.is-open {
+    transform: translateX(0);
+  }
+
+  .panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .filters__head {
+    padding-right: 40px;
+  }
+
+  .spot-scroll {
+    max-height: none;
+    flex: 1;
+  }
+
+  .filters-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 650;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+  }
+
+  .filters-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 690;
+    background: rgba(20, 18, 12, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .filters-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filters-backdrop[hidden] {
+    display: block; /* on garde l'élément monté pour l'animation d'ouverture/fermeture */
   }
 
   .detail {
     left: 14px;
     width: auto;
+  }
+
+  /* Légende : plus compacte pour ne pas manger la largeur utile de la carte */
+  .legend {
+    padding: 8px 10px;
+    font-size: 10.5px;
+    gap: 5px;
   }
 }
 
