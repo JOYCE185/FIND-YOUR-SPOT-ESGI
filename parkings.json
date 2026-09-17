@@ -105,9 +105,9 @@
     {
       "id": "parking-relais-lieutenant-colonel-jeanpierre",
       "nom": "Parking-relais Lieutenant-Colonel Jeanpierre",
-      "lat_long": [43.519, 5.411],
+      "lat_long": [43.530579, 5.416297],
       "tarif": "3,50 €/jour (forfait P+R, aller-retour bus inclus)",
-      "distance_m": 1700,
+      "distance_m": 2136,
       "nombre_places": 600,
       "pmr": true,
       "ouvert_24h": true,
@@ -117,9 +117,9 @@
     {
       "id": "parking-6mic",
       "nom": "Parking du 6MIC",
-      "lat_long": [43.518, 5.421],
+      "lat_long": [43.519213, 5.422405],
       "tarif": "Gratuit",
-      "distance_m": 1100,
+      "distance_m": 802,
       "nombre_places": 250,
       "pmr": true,
       "ouvert_24h": false,
