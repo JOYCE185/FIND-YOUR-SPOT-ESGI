@@ -66,7 +66,7 @@ carte.on("locationerror", function (e) {
 });
 
 async function init() {
-  const reponse = await fetch("/parkings.json");
+  const reponse = await fetch("parkings.json");
   data = await reponse.json();
 
   // Statut en direct de tous les parkings, récupéré en un seul appel

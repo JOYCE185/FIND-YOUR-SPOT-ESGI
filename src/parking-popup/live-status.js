@@ -10,7 +10,7 @@ function getClientId() {
   return id;
 }
 
-const API_BASE = "http://localhost:3001/api";
+const API_BASE = "api"; // relatif : /find-your-spot/api/ (proxy nginx -> fys-api)
 
 async function fetchStatus(id) {
   const res = await fetch(`${API_BASE}/parkings/${id}/status`);
