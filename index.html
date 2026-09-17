@@ -14,6 +14,7 @@
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="src/parking-popup/parking-popup.css" />
   </head>
 
   <body>
@@ -178,13 +179,6 @@
               ></span
               >L'école
             </span>
-            <span class="legend__item">
-              <span
-                class="legend__swatch legend__swatch--school"
-                aria-hidden="true"
-              ></span
-              ><a href="FormulaireRetours.html">Donner mon avis</a>
-            </span>
           </div>
 
           <!-- Fiche détaillée : masquée tant qu'aucun emplacement n'est sélectionné -->
@@ -289,6 +283,8 @@
 
     <!-- ===================== SCRIPTS ===================== -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="src/parking-popup/parking-popup.js"></script>
+    <script src="src/parking-popup/live-status.js"></script>
     <script src="main.js" defer></script>
   </body>
 </html>
