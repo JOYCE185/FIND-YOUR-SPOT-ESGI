@@ -2,19 +2,13 @@
   "centre_recherche": {
     "nom": "Campus Skolae",
     "adresse": "684 Av. du Club Hippique, 13090 Aix-en-Provence",
-    "lat_long": [
-      43.51356188950919,
-      5.4285869749073115
-    ]
+    "lat_long": [43.51356188950919, 5.4285869749073115]
   },
   "rayon_km": 3,
   "parkings": [
     {
       "id": "parking-relais-krypton-effia",
-      "lat_long": [
-        43.511418,
-        5.445182
-      ],
+      "lat_long": [43.511418, 5.445182],
       "nom": "Parking-relais Krypton (EFFIA)",
       "tarif": "3,50 €/jour (forfait P+R, aller-retour bus inclus)",
       "distance_m": 1360,
@@ -26,10 +20,7 @@
     },
     {
       "id": "parking-rotonde",
-      "lat_long": [
-        43.5264049,
-        5.4436793
-      ],
+      "lat_long": [43.5264049, 5.4436793],
       "nom": "Parking Rotonde",
       "tarif": "≈1,90 €/h en journée (30 premières minutes gratuites)",
       "distance_m": 1850,
@@ -41,10 +32,7 @@
     },
     {
       "id": "parking-mignet",
-      "lat_long": [
-        43.524356,
-        5.447751
-      ],
+      "lat_long": [43.524356, 5.447751],
       "nom": "Parking Mignet",
       "tarif": "≈1,90 €/h en journée (même grille que la régie métropolitaine)",
       "distance_m": 1950,
@@ -56,10 +44,7 @@
     },
     {
       "id": "parking-pasteur",
-      "lat_long": [
-        43.533953,
-        5.446112
-      ],
+      "lat_long": [43.533953, 5.446112],
       "nom": "Parking Pasteur",
       "tarif": "≈1,90 €/h en journée (2x15 min gratuites puis 1,10 €/¼h)",
       "distance_m": 2670,
@@ -71,10 +56,7 @@
     },
     {
       "id": "parking-de-la-fondation-vasarely",
-      "lat_long": [
-        43.520276,
-        5.425038
-      ],
+      "lat_long": [43.520276, 5.425038],
       "nom": "Parking de la Fondation Vasarely",
       "tarif": "Free",
       "distance_m": 800,
@@ -86,10 +68,7 @@
     },
     {
       "id": "parking-gratuit-secteur-jas-de-bouffan",
-      "lat_long": [
-        43.5213948,
-        5.4325013
-      ],
+      "lat_long": [43.5213948, 5.4325013],
       "nom": "Parking gratuit (secteur Jas de Bouffan)",
       "tarif": "Free",
       "distance_m": 920,
@@ -101,10 +80,7 @@
     },
     {
       "id": "parking-du-centre-commercial-jas-de-bouffan",
-      "lat_long": [
-        43.532825,
-        5.418087
-      ],
+      "lat_long": [43.532825, 5.418087],
       "nom": "Parking du centre commercial Jas de Bouffan",
       "tarif": "Free",
       "distance_m": 2300,
@@ -116,16 +92,49 @@
     },
     {
       "id": "parking-covoiturage-pont-de-l-arc",
-      "lat_long": [
-        43.510221,
-        5.443047
-      ],
+      "lat_long": [43.510221, 5.443047],
       "nom": "Parking covoiturage Pont-de-l'Arc",
       "tarif": "Free",
       "distance_m": 1220,
       "nombre_places": 30,
       "pmr": false,
       "ouvert_24h": true,
+      "abrite": false,
+      "image": null
+    },
+    {
+      "id": "parking-relais-lieutenant-colonel-jeanpierre",
+      "nom": "Parking-relais Lieutenant-Colonel Jeanpierre",
+      "lat_long": [43.519, 5.411],
+      "tarif": "3,50 €/jour (forfait P+R, aller-retour bus inclus)",
+      "distance_m": 1700,
+      "nombre_places": 600,
+      "pmr": true,
+      "ouvert_24h": true,
+      "abrite": false,
+      "image": null
+    },
+    {
+      "id": "parking-6mic",
+      "nom": "Parking du 6MIC",
+      "lat_long": [43.518, 5.421],
+      "tarif": "Gratuit",
+      "distance_m": 1100,
+      "nombre_places": 250,
+      "pmr": true,
+      "ouvert_24h": false,
+      "abrite": false,
+      "image": null
+    },
+    {
+      "id": "parking-face-6mic",
+      "nom": "Parking face au 6MIC",
+      "lat_long": [43.518, 5.42],
+      "tarif": "Gratuit",
+      "distance_m": 1150,
+      "nombre_places": 200,
+      "pmr": false,
+      "ouvert_24h": false,
       "abrite": false,
       "image": null
     }
