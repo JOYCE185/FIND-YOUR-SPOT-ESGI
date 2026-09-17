@@ -25,7 +25,7 @@ function createParkingIcon(parking) {
   const statusClass = parking.liveStatus
     ? `marker-status-dot--${parking.liveStatus.status}`
     : "marker-status-dot--unknown";
-  const color = parking.tarif === "Free" ? "#4257b2" : "#b07a2e";
+  const color = parking.tarif === "Gratuit" ? "#4257b2" : "#b07a2e";
 
   return L.divIcon({
     className: "custom-marker",
@@ -78,6 +78,16 @@ async function init() {
   chargerParkings();
 }
 
+function correspond(p) {
+  if (p.distance_m > Number(curseur.value)) return false;
+  if (document.getElementById("filter-pmr").checked && !p.pmr) return false;
+  if (document.getElementById("filter-open24").checked && !p.ouvert_24h)
+    return false;
+  if (document.getElementById("filter-covered").checked && !p.abrite)
+    return false;
+  return true;
+}
+
 function updateLabel() {
   label.textContent = "≤ " + curseur.value + " m";
   if (cercle) cercle.remove();
@@ -99,30 +109,30 @@ function chargerParkings() {
   markersById.clear();
 
   data.parkings.forEach((parking) => {
-    if (parking.distance_m <= curseur.value) {
-      const marker = L.marker(parking.lat_long, {
-        icon: createParkingIcon(parking),
-      })
-        .addTo(groupe)
-        .bindPopup(popupTemplate(parking));
-      markersById.set(parking.id, marker);
+    if (!correspond(parking)) return;
 
-      // Au cas où le statut aurait changé depuis le chargement de la page
-      marker.on("popupopen", async () => {
-        parking.liveStatus = await fetchStatus(parking.id);
-        marker.setPopupContent(popupTemplate(parking));
-        marker.setIcon(createParkingIcon(parking));
-      });
+    const marker = L.marker(parking.lat_long, {
+      icon: createParkingIcon(parking),
+    })
+      .addTo(groupe)
+      .bindPopup(popupTemplate(parking));
+    markersById.set(parking.id, marker);
 
-      marker.on("click", () => {
-        if (ligneActive) ligneActive.remove();
-        ligneActive = L.polyline([ECOLE, parking.lat_long], {
-          color: "#26241f",
-          weight: 2,
-          dashArray: "4 6",
-        }).addTo(carte);
-      });
-    }
+    // Au cas où le statut aurait changé depuis le chargement de la page
+    marker.on("popupopen", async () => {
+      parking.liveStatus = await fetchStatus(parking.id);
+      marker.setPopupContent(popupTemplate(parking));
+      marker.setIcon(createParkingIcon(parking));
+    });
+
+    marker.on("click", () => {
+      if (ligneActive) ligneActive.remove();
+      ligneActive = L.polyline([ECOLE, parking.lat_long], {
+        color: "#26241f",
+        weight: 2,
+        dashArray: "4 6",
+      }).addTo(carte);
+    });
   });
 }
 
@@ -173,6 +183,11 @@ function closeFiltersPanel() {
     filtersBackdrop.hidden = true;
   }, 200);
 }
+
+document.getElementById("filters").addEventListener("input", () => {
+  updateLabel();
+  chargerParkings();
+});
 
 filtersToggle.addEventListener("click", () => {
   if (filtersPanel.classList.contains("is-open")) {
