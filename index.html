@@ -55,7 +55,11 @@
 
       <div class="layout">
         <!-- ===================== PANNEAU LATÉRAL ===================== -->
-        <aside class="panel" id="filters-panel" aria-label="Filtres et résultats">
+        <aside
+          class="panel"
+          id="filters-panel"
+          aria-label="Filtres et résultats"
+        >
           <button
             type="button"
             class="panel-close"
@@ -71,21 +75,6 @@
                 Réinitialiser
               </button>
             </div>
-
-            <label class="field" for="filter-price">
-              <span class="field__label">Prix maximum</span>
-              <select
-                class="select"
-                id="filter-price"
-                name="price"
-                data-filter="price"
-              >
-                <option value="99" selected>Tous les tarifs</option>
-                <option value="0">Gratuit uniquement</option>
-                <option value="1.5">Jusqu'à 1,50 €/h</option>
-                <option value="2.5">Jusqu'à 2,50 €/h</option>
-              </select>
-            </label>
 
             <label class="field" for="filter-walk">
               <span class="field__label">
@@ -141,21 +130,9 @@
                 <span>Abrité</span>
               </label>
             </fieldset>
-
-            <label class="field field--inline" for="sort-by">
-              <span class="field__label">Trier par</span>
-              <select class="select" id="sort-by" name="sort" data-sort>
-                <option value="walk" selected>Distance à pied</option>
-                <option value="price">Prix</option>
-                <option value="spots">Nombre de places</option>
-              </select>
-            </label>
           </form>
 
-          <div class="results-count" role="status" aria-live="polite">
-            <span id="count-label">10 emplacements</span>
-            <span id="free-label">4 gratuits</span>
-          </div>
+          <div class="results-count" role="status" aria-live="polite"></div>
 
           <div class="spot-scroll">
             <ul class="spot-list" id="spot-list"></ul>
