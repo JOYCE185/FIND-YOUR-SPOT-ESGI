@@ -1,4 +1,4 @@
-const ECOLE = [43.5135, 5.4282];
+let ECOLE = [43.51356188950919, 5.4285869749073115];
 const curseur = document.getElementById("filter-walk");
 const label = document.getElementById("walk-label");
 
@@ -68,6 +68,7 @@ carte.on("locationerror", function (e) {
 async function init() {
   const reponse = await fetch("parkings.json");
   data = await reponse.json();
+  ECOLE = data.centre_recherche.lat_long;
 
   // Statut en direct de tous les parkings, récupéré en un seul appel
   const statuses = await fetchAllStatuses();

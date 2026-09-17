@@ -125,18 +125,6 @@
       "ouvert_24h": false,
       "abrite": false,
       "image": null
-    },
-    {
-      "id": "parking-face-6mic",
-      "nom": "Parking face au 6MIC",
-      "lat_long": [43.518, 5.42],
-      "tarif": "Gratuit",
-      "distance_m": 1150,
-      "nombre_places": 200,
-      "pmr": false,
-      "ouvert_24h": false,
-      "abrite": false,
-      "image": null
     }
   ]
 }
