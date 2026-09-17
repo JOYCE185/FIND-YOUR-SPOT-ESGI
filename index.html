@@ -42,9 +42,34 @@
         </p>
       </header>
 
+<<<<<<< HEAD
       <div class="layout">
         <!-- ===================== PANNEAU LATÉRAL ===================== -->
         <aside class="panel" aria-label="Filtres et résultats">
+=======
+      <button
+        type="button"
+        class="filters-toggle"
+        id="filters-toggle"
+        aria-expanded="false"
+        aria-controls="filters-panel"
+      >
+        <span aria-hidden="true">☰</span> Filtres
+      </button>
+      <div class="filters-backdrop" id="filters-backdrop" hidden></div>
+
+      <div class="layout">
+        <!-- ===================== PANNEAU LATÉRAL ===================== -->
+        <aside class="panel" id="filters-panel" aria-label="Filtres et résultats">
+          <button
+            type="button"
+            class="panel-close"
+            id="panel-close"
+            aria-label="Fermer les filtres"
+          >
+            ×
+          </button>
+>>>>>>> a43261f9e2b9a3f41f687f169f60443cc25206ec
           <form class="filters" id="filters">
             <div class="filters__head">
               <h2 class="filters__title">Filtres</h2>
@@ -179,6 +204,16 @@
               ></span
               >L'école
             </span>
+<<<<<<< HEAD
+=======
+            <span class="legend__item">
+              <span
+                class="legend__swatch legend__swatch--school"
+                aria-hidden="true"
+              ></span
+              ><a href="FormulaireRetours.html">Donner mon avis</a>
+            </span>
+>>>>>>> a43261f9e2b9a3f41f687f169f60443cc25206ec
           </div>
 
           <!-- Fiche détaillée : masquée tant qu'aucun emplacement n'est sélectionné -->
@@ -287,4 +322,8 @@
     <script src="src/parking-popup/live-status.js"></script>
     <script src="main.js" defer></script>
   </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> a43261f9e2b9a3f41f687f169f60443cc25206ec

@@ -6,7 +6,11 @@
 
 .leaflet-popup-content {
   margin: 0;
+<<<<<<< HEAD
   width: 260px !important;
+=======
+  width: min(260px, 78vw) !important;
+>>>>>>> a43261f9e2b9a3f41f687f169f60443cc25206ec
 }
 
 .leaflet-popup-tip {
@@ -144,3 +148,14 @@
   color: #1a73e8;
   min-height: 14px;
 }
+<<<<<<< HEAD
+=======
+
+/* ===== Écrans tactiles : boutons de signalement plus confortables ===== */
+@media (max-width: 480px), (pointer: coarse) {
+  .live-status__btn {
+    padding: 9px 4px;
+    font-size: 12.5px;
+  }
+}
+>>>>>>> a43261f9e2b9a3f41f687f169f60443cc25206ec
