@@ -19,7 +19,28 @@ function createIcon(iconFunction, color = "#000") {
   });
 }
 
-const carte = L.map("map").setView(ECOLE, 15);
+// Icône de parking avec un petit point coloré indiquant le statut en
+// direct (🟢/🟡/🟠/🔴), sans avoir à ouvrir la popup.
+function createParkingIcon(parking) {
+  const statusClass = parking.liveStatus
+    ? `marker-status-dot--${parking.liveStatus.status}`
+    : "marker-status-dot--unknown";
+  const color = parking.tarif === "Free" ? "#4257b2" : "#b07a2e";
+
+  return L.divIcon({
+    className: "custom-marker",
+    html: `
+      <span class="marker-wrap">
+        ${parkingIcon(color)}
+        <span class="marker-status-dot ${statusClass}"></span>
+      </span>
+    `,
+    iconSize: [ICON_HEIGHT, ICON_HEIGHT],
+    iconAnchor: [ICON_HEIGHT / 2, ICON_HEIGHT / 2],
+  });
+}
+
+const carte = L.map("map", { attributionControl: false }).setView(ECOLE, 15);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(carte);
 L.marker(ECOLE, { icon: createIcon(schoolIcon) })
   .addTo(carte)
@@ -80,10 +101,7 @@ function chargerParkings() {
   data.parkings.forEach((parking) => {
     if (parking.distance_m <= curseur.value) {
       const marker = L.marker(parking.lat_long, {
-        icon: createIcon(
-          parkingIcon,
-          parking.tarif === "Free" ? "#4257b2" : "#b07a2e",
-        ),
+        icon: createParkingIcon(parking),
       })
         .addTo(groupe)
         .bindPopup(popupTemplate(parking));
@@ -93,6 +111,7 @@ function chargerParkings() {
       marker.on("popupopen", async () => {
         parking.liveStatus = await fetchStatus(parking.id);
         marker.setPopupContent(popupTemplate(parking));
+        marker.setIcon(createParkingIcon(parking));
       });
 
       marker.on("click", () => {
@@ -128,8 +147,86 @@ window.handleReport = async function (id, status) {
   if (p) p.liveStatus = resultat;
 
   const marqueur = markersById.get(id);
-  if (marqueur && p) marqueur.setPopupContent(popupTemplate(p));
+  if (marqueur && p) {
+    marqueur.setPopupContent(popupTemplate(p));
+    marqueur.setIcon(createParkingIcon(p));
+  }
 };
+
+// ---- Tiroir de filtres (mobile) ----
+const filtersPanel = document.getElementById("filters-panel");
+const filtersToggle = document.getElementById("filters-toggle");
+const filtersBackdrop = document.getElementById("filters-backdrop");
+
+function openFiltersPanel() {
+  filtersPanel.classList.add("is-open");
+  filtersBackdrop.hidden = false;
+  requestAnimationFrame(() => filtersBackdrop.classList.add("is-open"));
+  filtersToggle.setAttribute("aria-expanded", "true");
+}
+
+function closeFiltersPanel() {
+  filtersPanel.classList.remove("is-open");
+  filtersBackdrop.classList.remove("is-open");
+  filtersToggle.setAttribute("aria-expanded", "false");
+  setTimeout(() => {
+    filtersBackdrop.hidden = true;
+  }, 200);
+}
+
+filtersToggle.addEventListener("click", () => {
+  if (filtersPanel.classList.contains("is-open")) {
+    closeFiltersPanel();
+  } else {
+    openFiltersPanel();
+  }
+});
+filtersBackdrop.addEventListener("click", closeFiltersPanel);
+
+const panelClose = document.getElementById("panel-close");
+panelClose.addEventListener("click", closeFiltersPanel);
+
+carte.on("click", () => {
+  if (filtersPanel.classList.contains("is-open")) closeFiltersPanel();
+});
+
+// Fermeture au glissement vers la gauche (tiroir ancré à gauche)
+let dragStartX = null;
+let dragDeltaX = 0;
+let panelWidthPx = 0;
+
+filtersPanel.addEventListener(
+  "touchstart",
+  (e) => {
+    if (!filtersPanel.classList.contains("is-open")) return;
+    dragStartX = e.touches[0].clientX;
+    panelWidthPx = filtersPanel.getBoundingClientRect().width;
+    filtersPanel.style.transition = "none";
+  },
+  { passive: true },
+);
+
+filtersPanel.addEventListener(
+  "touchmove",
+  (e) => {
+    if (dragStartX === null) return;
+    dragDeltaX = Math.min(0, e.touches[0].clientX - dragStartX);
+    filtersPanel.style.transform = `translateX(${dragDeltaX}px)`;
+  },
+  { passive: true },
+);
+
+filtersPanel.addEventListener("touchend", () => {
+  if (dragStartX === null) return;
+  filtersPanel.style.transition = "";
+  filtersPanel.style.transform = "";
+
+  const seuilFermeture = panelWidthPx * 0.3;
+  if (Math.abs(dragDeltaX) > seuilFermeture) closeFiltersPanel();
+
+  dragStartX = null;
+  dragDeltaX = 0;
+});
 
 curseur.addEventListener("input", updateLabel);
 updateLabel(); // affiche le cercle de distance immédiatement

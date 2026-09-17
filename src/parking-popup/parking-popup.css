@@ -6,7 +6,7 @@
 
 .leaflet-popup-content {
   margin: 0;
-  width: 260px !important;
+  width: min(260px, 78vw) !important;
 }
 
 .leaflet-popup-tip {
@@ -143,4 +143,12 @@
   font-size: 11px;
   color: #1a73e8;
   min-height: 14px;
+}
+
+/* ===== Écrans tactiles : boutons de signalement plus confortables ===== */
+@media (max-width: 480px), (pointer: coarse) {
+  .live-status__btn {
+    padding: 9px 4px;
+    font-size: 12.5px;
+  }
 }
