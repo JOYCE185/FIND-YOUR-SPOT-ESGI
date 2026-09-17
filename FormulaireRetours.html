@@ -133,7 +133,6 @@
     user-select:none;
   }
   .stars .star:hover{ transform: translateY(-1px); }
-  /* étoile cochée + toutes celles qui la précèdent visuellement (soeurs suivantes en DOM, grâce à row-reverse) */
   .stars input:checked ~ .star{
     color: var(--amber);
   }
@@ -317,13 +316,13 @@
     return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8);
   }
 
-  async function loadStats(){
+  function loadStats(){
     const loadingEl = document.getElementById('statLoading');
     try{
       let notes = [];
       let count = 0;
 
-      // Parcours de toutes les clés enregistrées dans localStorage
+      // Parcours du localStorage pour récupérer les avis
       for(let i = 0; i < localStorage.length; i++){
         const key = localStorage.key(i);
         if(key && key.startsWith(PREFIX)){
@@ -348,7 +347,7 @@
     }
   }
 
-  document.getElementById('feedbackForm').addEventListener('submit', async function(ev){
+  document.getElementById('feedbackForm').addEventListener('submit', function(ev){
     ev.preventDefault();
     const form = ev.target;
     const errorEl = document.getElementById('formError');
@@ -379,13 +378,12 @@
     btn.textContent = 'Envoi…';
 
     try{
+      // Enregistrement dans localStorage
       localStorage.setItem(PREFIX + uid(), JSON.stringify(entry));
-      if(!result){
-        throw new Error('Échec de l\'enregistrement');
-      }
+
       form.style.display = 'none';
       document.getElementById('thanks').style.display = 'block';
-      await loadStats();
+      loadStats();
     }catch(e){
       console.error('Erreur d\'envoi', e);
       errorEl.textContent = 'L\'envoi a échoué, réessayez dans un instant.';
@@ -395,8 +393,10 @@
     }
   });
 
+  // Chargement initial des statistiques
   loadStats();
-  // Écouter les modifications venant d'autres onglets
+
+  // Écouteur temps réel multi-onglets
   window.addEventListener('storage', (event) => {
     if (event.key && event.key.startsWith(PREFIX)) {
       loadStats();
